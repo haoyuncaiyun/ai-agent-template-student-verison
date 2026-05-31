@@ -1,14 +1,21 @@
 from core.state import STATE
 
-def cart_add(item: str, cost: int):
-    STATE["cart"].append({
-        "name": item,
-        "price": cost
-    })
-    return f"Added {item} for ${cost}"
+def set_age(age: int):
+    STATE["age"] = age
+    return f"Your age is: {age}"
 
-def cart_total():
-    return sum(entry["price"] for entry in STATE["cart"])
+def pulse_result(pulseResult: int):
+    STATE["pulse_results"].append(pulseResult)
 
-def cart_list():
-    return STATE["cart"]
+    if pulseResult < 60:
+        status = "low"
+    elif pulseResult <= 100:
+        status = "healthy/stable"
+    else:
+        status = "too high"
+
+    return f"Your pulse is {pulseResult}, you are currently {status}."
+
+def conversation_note(note: str):
+    STATE["conversations"].append(note)
+    return "I remembered this conversation."
